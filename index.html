@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المعرفة - المحور الثاني والثالث</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5c7a;
+            --secondary-color: #4a8bad;
+            --accent-color: #d9a74a;
+            --light-color: #f8f9fa;
+            --dark-color: #2d3e50;
+            --text-color: #333;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .logo-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .student-info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 5px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: block;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-color), var(--primary-color));
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-left: 10px;
+            background: var(--accent-color);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+        
+        .subsection {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 8px;
+            border-right: 4px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .subsection:hover {
+            border-right: 4px solid var(--accent-color);
+        }
+        
+        .subsection-title {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .subsection-title i {
+            margin-left: 10px;
+            color: var(--accent-color);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--dark-color), #3a506b);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .copyright {
+            margin-top: 15px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                border-radius: 8px;
+                margin: 2px 0;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .subsection {
+                padding: 15px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: absolute;
+            opacity: 0.03;
+            font-size: 15rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: -50px;
+            left: -30px;
+            color: var(--primary-color);
+        }
+        
+        .decoration-2 {
+            bottom: -70px;
+            right: -20px;
+            color: var(--secondary-color);
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo"><i class="fas fa-book-open"></i> إدارة المعرفة</div>
+                <p class="subtitle">المحور الثاني والثالث من محاضرات إدارة المعرفة</p>
+                <div class="student-info">
+                    <i class="fas fa-user-graduate"></i> إعداد وتقديم الطالب: قيس طلال الجازي
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#section2" class="active"><i class="fas fa-brain"></i> المحور الثاني: عمليات إدارة المعرفة</a></li>
+                <li><a href="#section3"><i class="fas fa-chart-line"></i> المحور الثالث: مبادئ وتحديات إدارة المعرفة</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- المحور الثاني -->
+        <section id="section2" class="section animated">
+            <div class="decoration decoration-1"><i class="fas fa-lightbulb"></i></div>
+            <h2 class="section-title"><i class="fas fa-brain"></i> المحور الثاني: عمليات إدارة المعرفة</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-search"></i> أولاً: تشخيص المعرفة</h3>
+                <p>بعد تشخيص المعرفة من الأمور المهمة في أي برنامج الإدارة المعرفة، وعلى ضوء هذا التشخيص يتم وضع سياسات وبرامج العمليات الأخرى لأن من نتائج عمليات التشخيص معرفة أنواع المعرفة المتوافرة، ومن خلال مقارنتها بما هو مطلوب يمكن تحديد الفجوة.</p>
+                <p>عملية التشخيص أمر حتمي أن الهدف منها هو اكتشاف معرفة المنظمة، وتحديد الأشخاص الحاملين لها ومواقعهم كذلك تحدد لنا مكان هذه المعرفة في القواعد. وتعد عملية التشخيص من أهم التحديات التي تواجه منظمات الأعمال أن النجاح في مشروع إدارة المعرفة يتوقف على دقة التشخيص.</p>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-seedling"></i> ثانياً: توليد المعرفة</h3>
+                <p>هي عملية خلق أو اكتساب معارف جديدة، حيث تعد هذه العملية تجميعا لعدة عمليات متداخلة ومتكاملة فيما بينها. ابتداء من أسر (Capturing)، شراء (Creating)، ابتكر (Discovering) اكتشاف (Creating)، استيعاص (Absorption)، اكتساب أو استحواذ (Acquiring) المعرفة.</p>
+                <p>فالشراء يعني الحصول على المعرفة عن طريق الشراء المباشر أو عن طريق عقود الاستخدام والتوظيف، والاستيعاص يشير إلى الفترة على القيم واستيعاب المعرفة الظاهرة، والأسر يعني الحصول على المعرفة الضمنية الكامنة في أذهان وتجارب المبدعين، والابتكار يشير إلى توليد معرفة جديدة غير مسبوقة وغير مستنسخة.</p>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-database"></i> ثالثاً: خزن المعرفة</h3>
+                <p>وتتعلق عملية خزن المعرفة بعمليات الاحتفاظ (Keeping) والإدامة (Maintenance) والترميز (Codify) وإمكانية الوصول (Accessibility) والأمان (Security) والرسمية (Formality) والحماية (Protection) والاسترجاع (Retrival).</p>
+                <p>إذ أن عملية خزن المعرفة تسمح بتعليل المعرفة وترميزها ووضعها بأشكال مختلفة يمكن الوصول إليها ونقلها، وتسمح بظهور نتائج الموجود المعرفي، لكن تباع للآخرين ضمن المنظمة وخارجها، وتعدد المنظمات إلى خزن المعرفة القديمة والحديثة سواء بطريقة الخزن الورقية القديمة، أو بالطرق والأساليب الحاسوبية الحديثة ليسند المنظمات الاستفادة من المعرفة واسترجاعها في الوقت المناسب.</p>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-share-alt"></i> رابعاً: توزيع المعرفة (مشاركة المعرفة)</h3>
+                <p>يتضمن الكثير في تماثل وتشابه مصطلحي تشارك المعرفة ونقل المعرفة (Knowledge Transfer). فتشارك المعرفة مفهوم أوسع وأشمل من نقل المعرفة. حيث هذه الأخيرة هي خطوة نحو تشارك المعرفة مثلما يبين Coakes والتي تعني إيمال المعرفة المناسبة إلى الشخص المناسب في الوقت المناسب وبالشكل المناسب.</p>
+                <p>عند نقل المعرفة الضمنية يتناخل عندها مفهوم النقل مع المشاركة، إذ تنقل في المنظمة وفق شكلي مثلما يشير Marquardt: الشكل المقصود (تنقل فيه المعرفة عن قصد داخل المنظمة) والشكل غير المقصود (تنقل فيه المعرفة دون قصد وبشكل غير رسمي).</p>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-rocket"></i> خامساً: تطبيق المعرفة</h3>
+                <p>وتتضمن هذه الأخيرة عمليات الاستعمال (Use)، إعادة الاستعمال (Reuse)، الاستفادة (Utilisation) والتطبيق (Application). فالإدارة الناجحة هي التي تستخدم إدارة المعرفة المتوافرة في الوقت المناسب مع استثمار فرصة توفرها لتحقيق ميزة لها أو لحل مشكلة قائمة.</p>
+                <p>هذه العملية التي سماها دوف (Dove) بالاستجابة للمعرفة، فهو حسبه ببساطة تعني درجة استجابة المنظمة للأنواع المختلفة من المعلومات التي تصل فيها، ومثال عن ذلك عندما تصل معرفة عن احتياجات العملاء، ومن ثم الاستجابة لهذه المعلومات، وأسرع منظمة تستجيب لهذه الاحتياجات سوف يرتفع لديها منسوب رضا العملاء.</p>
+            </div>
+        </section>
+        
+        <!-- المحور الثالث -->
+        <section id="section3" class="section animated">
+            <div class="decoration decoration-2"><i class="fas fa-chart-pie"></i></div>
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> المحور الثالث: مبادئ وتحديات إدارة المعرفة وعوامل نجاحها</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-gem"></i> أولاً: مبادئ إدارة المعرفة</h3>
+                <p>إن مبادئ إدارة المعرفة ليست بقواعد ولا قواعد بل إنها مبادئ مستنبطة من تجارب التطبيق الناجح لمشروعات إدارة المعرفة في المؤسسات الحديثة، وهي تختلف بحسب المؤسسات والباحثين، ويمكن إدراجها كما يلي:</p>
+                <ol>
+                    <li>إن جوهر إدارة المعرفة هو الاستثمار في المعرفة</li>
+                    <li>توثيق الحلول الإنسانية والتكنولوجية</li>
+                    <li>إدارة المعرفة تتطلب وجود مديرين للمعرفة</li>
+                    <li>المشاركة بالمعرفة أصعب من إنتاجها</li>
+                    <li>النفاذ إلى المعرفة هو البداية فقط</li>
+                    <li>لا نهايات لأنشطة إدارة المعرفة</li>
+                    <li>تغيير إدارة المعرفة عملية مكلفة</li>
+                    <li>تتطلب عمليات الإدارة الفعالة للمعرفة سرعة إصدار وإيجاد الحلول بالنسبة للأفراد والتكنولوجيا</li>
+                    <li>إدارة المعرفة عملية سياسية وحساسة جداً</li>
+                    <li>تستفيد إدارة المعرفة من الخرائط أكثر من النماذج، ومن الأسواق أكثر من المراكز الوظيفية</li>
+                    <li>غالباً ما تكون عمليات المشاركة واستخدام المعرفة غير طبيعيين</li>
+                    <li>تعتبر إدارة المعرفة تحسين عمليات العمل المعرفي</li>
+                </ol>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-puzzle-piece"></i> ثانياً: عناصر إدارة المعرفة</h3>
+                <p>تتكون إدارة المعرفة من أربعة عناصر أساسية تتمثل في:</p>
+                <ol>
+                    <li><strong>المحتوى:</strong> وهو الذي يحدد المعلومات التي يمكن إدراجها ضمن العناصر الفكرية والمرتبطة على المعرفة ذات الدور البارز في تطوير أداء المؤسسات.</li>
+                    <li><strong>التكنولوجيا:</strong> وتقوم بتطوير عناصر الحاسب الآلي وبرامجه التي تستعمل في إيماء المهام المطلوبة.</li>
+                    <li><strong>العمليات:</strong> وتقوم برسم الإجراءات التي تحتاج إلى التحديث والتطوير للتأكد من أن إدارة المعرفة تتلاءم مع احتياجات المستخدمين.</li>
+                    <li><strong>الأفراد:</strong> تقوم المؤسسات بتشجيع القوى البشرية على تكوين المعرفة ومشاركتها واستخدامها.</li>
+                </ol>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-exclamation-triangle"></i> ثالثاً: تحديات إدارة المعرفة</h3>
+                <p>إن ظهور إدارة المعرفة وأهميتها يعود إلى مجموعة من التحديات تتمثل في:</p>
+                <ul>
+                    <li>كيفية اقتفاء أثر الزبائن وخدمة حاجاتهم عبر الشبكة العالمية</li>
+                    <li>كيفية استخدام تكنولوجيا المعلومات في الحصول على حصة ومكانة في سوق المنافسة</li>
+                    <li>الآلية التي تمكن الشركة من إعادة ترتيب أفكار العاملين وخبراتهم المتراكمة</li>
+                    <li>تبني فكرة الإبداع عن طريق تشجيع مبدأ تدفق الأفكار بحرية</li>
+                    <li>مساعدة على بناء ما يسمى "خبير المعرفة" وهو الشخص أو الأشخاص الذين لديهم معلومات حول موضوع أو تخصص ما</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title"><i class="fas fa-trophy"></i> رابعاً: عوامل نجاح إدارة المعرفة</h3>
+                <p>هناك مجموعة من العوامل أثرت في تطور إدارة المعرفة، ويشير Wills في هذا الصدد إلى عامليين وهما:</p>
+                
+                <h4><i class="fas fa-external-link-alt"></i> أ- العوامل الخارجية (External Factors)</h4>
+                <p>وهي تشير إلى العوامل البيئية التي تعمل في ظلها المنظمة والتي تؤثر في أعمالها، ولا تستطيع المنظمة سوى التكيف مع هذه المتغيرات والعوامل الخارجية والاستجابة لمتطلباتها وأهم هذه العوامل ما يلي:</p>
+                <ul>
+                    <li>العولمة</li>
+                    <li>زيادة التطور والتعقيد في حاجات ورغبات المستهلك</li>
+                    <li>زيادة حدة المنافسة</li>
+                    <li>زيادة مستوى التطور والتعقيد في عمليات التوريد</li>
+                </ul>
+                
+                <h4><i class="fas fa-cog"></i> ب- العوامل الداخلية (Internal Factors)</h4>
+                <p>هذه العوامل داخل المنظمة حيث تسهم في تطور إدارة المعرفة ومن أبرزها ما يلي:</p>
+                <ul>
+                    <li>حلول اختناقات في فاعلية المنظمة</li>
+                    <li>تزايد القدرات التكنولوجية</li>
+                    <li>فهم الوظائف المعرفية</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>محاضرات في مادة إدارة المعرفة - السنة الجامعية 2023/2024</p>
+                <p>المركز الجامعي عبد الحفيظ بوالصوف - ميلة</p>
+                <div class="copyright">
+                    <i class="far fa-copyright"></i> جميع الحقوق محفوظة - قيس الجازي 2025
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // زر العودة إلى الأعلى
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // التنقل السلس
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // إزالة النشط من جميع الروابط
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                
+                // إضافة النشط للرابط الحالي
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // إضافة تأثيرات للعناصر عند التمرير
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // مراقبة الأقسام لإضافة تأثيرات عند التمرير
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+        
+        // تحديث الرابط النشط أثناء التمرير
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('nav a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
